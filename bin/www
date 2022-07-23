@@ -22,6 +22,8 @@ app.set("port", port);
  */
 
 var server = http.createServer(app);
+//this implementation depends on using certbot and let's encrypt on your server
+//these paths should point to your certificates/keys
 var httpsServer = https.createServer(
   {
     key: fs.readFileSync("/etc/letsencrypt/live/my_app/privkey.pem"),
@@ -34,6 +36,7 @@ var httpsServer = https.createServer(
  * Listen on provided port, on all network interfaces.
  */
 
+//all http requests will be redirected by express
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
